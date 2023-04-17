@@ -42,8 +42,8 @@ class VilleList extends Component {
                 <td>{ville.nom}</td>
                 <td>
                     <ButtonGroup>
-                        <Button size="sm" color="primary" tag={Link} to={"/villes/" + ville.villeid}>Edit</Button>
-                        <Button size="sm" color="danger" onClick={() => this.remove(ville.villeid)}>Delete</Button>
+                        <a size="sm" color="primary" class="btn btn-primary" href={"/villes/" + ville.villeid}>Edit</a>
+                        <Button size="sm" color="danger" onClick={() =>{this.remove(ville.villeid);  window.location.reload();}}>Delete</Button>
                     </ButtonGroup>
                 </td>
             </tr>
@@ -54,7 +54,7 @@ class VilleList extends Component {
                 <AppNavbar/>
                 <Container fluid>
                     <div className="float-right">
-                        <Button color="success" tag={Link} to="/villes/new">Add Ville</Button>
+                        <a size="sm" class="btn btn-success" tag={Link} href={"/villes/new"}>Add Ville</a>
                     </div>
                     <h3>villes</h3>
                     <Table className="mt-4">
