@@ -19,9 +19,8 @@ function Navbar() {
 
             </li>
             <li className="navbar-item">
-              <Link to="/services" className="navbar-link">
-                Services
-              </Link>
+              <a className="navbar-link" href='/specialite'>specialite</a>
+
             </li>
             <li className="navbar-item">
               <Link to="/contact" className="navbar-link">

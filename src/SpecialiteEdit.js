@@ -3,11 +3,10 @@ import { Link, withRouter } from 'react-router-dom';
 import { Button, Container, Form, FormGroup, Input, Label } from 'reactstrap';
 import AppNavbar from './AppNavbar';
 
-class ZoneEdit extends Component {
+class SpecialiteEdit extends Component {
   emptyItem = {
-    zoneid: '',
+    specialiteid: '',
     nom: '',
-    ville: ''
   };
 
   constructor(props) {
@@ -17,7 +16,7 @@ class ZoneEdit extends Component {
       item: this.emptyItem,
       values: [],
       validationError: '',
-      zones: []
+      specialites: []
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -34,9 +33,9 @@ class ZoneEdit extends Component {
     const { id } = this.props.match.params;
 
     if (id !== 'new') {
-      const zoneResponse = await fetch(`http://localhost:8080/zone/Byid/${id}`);
-      const zone = await zoneResponse.json();
-      this.setState({ item: zone });
+      const specialiteResponse = await fetch(`http://localhost:8080/specialite/Byid/${id}`);
+      const specialite = await specialiteResponse.json();
+      this.setState({ item: specialite });
     }
   }
 
@@ -55,7 +54,7 @@ class ZoneEdit extends Component {
     event.preventDefault();
     const { item } = this.state;
   
-    await fetch('http://localhost:8080/zone' + (item.zoneid ? '/' + item.zoneid : ''), {
+    await fetch('http://localhost:8080/specialite' + (item.specialiteid ? '/' + item.specialiteid : ''), {
       method: (item.id) ? 'PUT' : 'POST',
       headers: {
         'Accept': 'application/json',
@@ -68,7 +67,7 @@ class ZoneEdit extends Component {
 
       }),
     });
-    this.props.history.push('/zone');
+    this.props.history.push('/specialite');
   }
   
   
@@ -79,7 +78,7 @@ class ZoneEdit extends Component {
 
   render() {
     const { item, values } = this.state;
-    const title = <h2>{item.zoneid ? 'Edit Zone' : 'Add Zone'}</h2>;
+    const title = <h2>{item.specialiteid ? 'Edit specialite' : 'Add specialite'}</h2>;
 
     return (
       <div>
@@ -93,16 +92,8 @@ class ZoneEdit extends Component {
                      onChange={this.handleChange} autoComplete="nom" />
             </FormGroup>
             <FormGroup>
-              <Label for="ville">City</Label>
-              <select id="ville-select" name="ville" onChange={this.handleChange}>
-                    {this.state.zones.map((ville) => (
-                        <option key={ville.id} value={JSON.stringify(ville)}>{ville.nom}</option>
-                    ))}
-                </select>
-            </FormGroup>
-            <FormGroup>
               <Button color="primary" type="submit">Save</Button>{' '}
-              <Button color="secondary" href="/zone">Cancel</Button>
+              <Button color="secondary" href="/specialite">Cancel</Button>
             </FormGroup>
           </Form>
         </Container>
@@ -111,4 +102,4 @@ class ZoneEdit extends Component {
   }
 }
 
-export default withRouter(ZoneEdit);
+export default withRouter(SpecialiteEdit);

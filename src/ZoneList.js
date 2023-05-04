@@ -43,7 +43,7 @@ class ZoneList extends Component {
                 <td>{zone.ville.nom}</td>
                 <td>
                     <ButtonGroup>
-                        <a size="sm" color="primary" class="btn btn-primary" href={"/zones/" + zone.zoneid}>Edit</a>
+                        <a size="sm" color="primary" class="btn btn-primary" href={"/zone/" + zone.zoneid}>Edit</a>
                         <Button size="sm" color="danger" onClick={() =>{this.remove(zone.zoneid);  window.location.reload();}}>Delete</Button>
                     </ButtonGroup>
                 </td>

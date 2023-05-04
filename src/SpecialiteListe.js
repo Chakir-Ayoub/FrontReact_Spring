@@ -3,47 +3,47 @@ import { Button, ButtonGroup, Container, Table } from 'reactstrap';
 import AppNavbar from './AppNavbar';
 import { Link } from 'react-router-dom';
 
-class VilleList extends Component {
+class SpecialiteListe extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {villes: []};
+        this.state = {specialites: []};
         this.remove = this.remove.bind(this);
     }
 
     componentDidMount() {
-        fetch('http://localhost:8080/ville')
+        fetch('http://localhost:8080/specialite')
             .then(response => response.json())
-            .then(data => this.setState({villes: data}));
+            .then(data => this.setState({specialites: data}));
     }
     async remove(id) {
-        await fetch(`http://localhost:8080/ville/${id}`, {
+        await fetch(`http://localhost:8080/specialite/${id}`, {
             method: 'DELETE',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             }
         }).then(() => {
-            let updatedvilles = [...this.state.villes].filter(i => i.id !== id);
-            this.setState({villes: updatedvilles});
+            let updatedspecialites = [...this.state.specialites].filter(i => i.id !== id);
+            this.setState({specialites: updatedspecialites});
         });
     }
     
     render() {
-        const {villes, isLoading} = this.state;
+        const {specialites, isLoading} = this.state;
     
         if (isLoading) {
             return <p>Loading...</p>;
         }
     
-        const clientList = villes.map(ville => {
-            return <tr key={ville.id}>
-                <td style={{whiteSpace: 'nowrap'}}>{ville.villeid}</td>
-                <td>{ville.nom}</td>
+        const clientList = specialites.map(specialite => {
+            return <tr key={specialite.id}>
+                <td style={{whiteSpace: 'nowrap'}}>{specialite.specialiteid}</td>
+                <td>{specialite.nom}</td>
                 <td>
                     <ButtonGroup>
-                        <a size="sm" color="primary" class="btn btn-primary" href={"/ville/" + ville.villeid}>Edit</a>
-                        <Button size="sm" color="danger" onClick={() =>{this.remove(ville.villeid);  window.location.reload();}}>Delete</Button>
+                        <a size="sm" color="primary" class="btn btn-primary" href={"/specialite/" + specialite.specialiteid}>Edit</a>
+                        <Button size="sm" color="danger" onClick={() =>{this.remove(specialite.specialiteid);  window.location.reload();}}>Delete</Button>
                     </ButtonGroup>
                 </td>
 
@@ -55,9 +55,9 @@ class VilleList extends Component {
                 <AppNavbar/>
                 <Container fluid>
                     <div className="float-right">
-                        <a size="sm" class="btn btn-success" tag={Link} href={"/villes/new"}>Add Ville</a>
+                        <a size="sm" class="btn btn-success" tag={Link} href={"/specialites/new"}>Add specialite</a>
                     </div>
-                    <h3>villes</h3>
+                    <h3>specialites</h3>
                     <Table className="mt-4">
                         <thead>
                         <tr>
@@ -75,4 +75,4 @@ class VilleList extends Component {
         );
     }
 }
-export default VilleList;
+export default SpecialiteListe;
