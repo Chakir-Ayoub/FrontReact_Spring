@@ -20,6 +20,10 @@ function Navbar() {
             </li>
             <li className="navbar-item">
               <a className="navbar-link" href='/specialite'>specialite</a>
+            </li>
+
+            <li className="navbar-item">
+              <a className="navbar-link" href='/serie'>serie</a>
 
             </li>
             <li className="navbar-item">

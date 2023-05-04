@@ -8,6 +8,8 @@ import ZoneList from './ZoneList';
 import ZoneEdit from './ZoneEdit';
 import SpecialiteListe from './SpecialiteListe';
 import SpecialiteEdit from './SpecialiteEdit';
+import SerieList from './SerieList';
+import SerieEdit from './SerieEdit';
 class App extends Component {
   render() {
     return (
@@ -24,6 +26,9 @@ class App extends Component {
              <Route path='/specialite' exact={true} component={SpecialiteListe}></Route>
              <Route path='/specialite/:id' exact={true} component={SpecialiteEdit}/> 
 
+
+             <Route path='/serie' exact={true} component={SerieList}></Route>
+             <Route path='/serie/:id' exact={true} component={SerieEdit}/> 
           </Switch>
         </Router>
     )
