@@ -3,14 +3,30 @@ import { Link, withRouter } from 'react-router-dom';
 import { Button, Container, Form, FormGroup, Input, Label } from 'reactstrap';
 import AppNavbar from './AppNavbar';
 
-class VilleEdit extends Component {
+
+var values;
+fetch('http://localhost:8080/ville')
+    .then(function(res) {
+        return res.json();
+    }).then(function(json) {
+        values = json;
+ 
+    });
+class ZoneEdit extends Component {
 
     emptyItem = {
-        villeid: '',
-        nom: ''
+        zoneid: '',
+        nom: '',
+        ville:''
     };
+    
+    state = {
+        currencies: [],
+        selectedUser : "",
+        validationError : ""
+      }
 
-    constructor(props) {
+        constructor(props) {
         super(props);
         this.state = {
             item: this.emptyItem
@@ -19,12 +35,18 @@ class VilleEdit extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
+    
+    
     async componentDidMount() {
         if (this.props.match.params.id !== 'new') {
-            const ville = await (await fetch(`http://localhost:8080/ville/Byid/${this.props.match.params.id}`)).json();
-            this.setState({item: ville});
+            const zone = await (await fetch(`http://localhost:8080/zone/Byid/${this.props.match.params.id}`)).json();
+            this.setState({item: zone});
         }
     }
+
+  
+
+
 
     handleChange(event) {
         const target = event.target;
@@ -39,7 +61,7 @@ class VilleEdit extends Component {
         event.preventDefault();
         const {item} = this.state;
     
-        await fetch('http://localhost:8080/ville' + (item.id ? '/' + item.id : ''), {
+        await fetch('http://localhost:8080/zone' + (item.id ? '/' + item.id : ''), {
             method: (item.id) ? 'PUT' : 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -47,30 +69,43 @@ class VilleEdit extends Component {
             },
             body: JSON.stringify(item),
         });
-        this.props.history.push('http://localhost:8080/ville');
+        this.props.history.push('http://localhost:8080/zone');
     }
 
     render() {
         const {item} = this.state;
-        const title = <h2>{item.villeid ? 'Edit Ville' : 'Add Ville'}</h2>;
-    
+        const title = <h2>{item.zoneid ? 'Edit Zone' : 'Add Zone'}</h2>;
         return <div>
             <AppNavbar/>
             <Container>
                 {title}
                 <Form onSubmit={this.handleSubmit}>
+                    
                     <FormGroup>
                         <Label for="nom">Name</Label>
                         <Input type="text" name="nom" id="nom" value={item.nom || ''}
                                onChange={this.handleChange} autoComplete="nom"/>
+
+                      <FormGroup>
+                      <div>
+  <label htmlFor="options">Choose an option:</label>
+  <select id="ville-select" name="ville" onChange={this.handleChange} autoComplete="ville">
+    {values?.map((ville) => (
+      <option key={ville.id} value={ville.nom}>
+        {ville.nom}
+      </option>
+    ))}
+  </select>
+</div>
+                      </FormGroup>
                     </FormGroup>
                     <FormGroup>
                         <Button color="primary" type="submit">Save</Button>{' '}
-                        <Button color="secondary" href={"/villes"}>Cancel</Button>
+                        <Button color="secondary" href={"/zone"}>Cancel</Button>
                     </FormGroup>
                 </Form>
             </Container>
         </div>
     }
 }
-export default withRouter(VilleEdit);
+export default withRouter(ZoneEdit);

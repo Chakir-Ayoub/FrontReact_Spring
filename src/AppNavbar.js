@@ -12,12 +12,11 @@ function Navbar() {
         <div className="navbar-menu">
           <ul className="navbar-list">
             <li className="navbar-item">
-            <a className="navbar-link" href='villes'>Ville</a>
+            <a className="navbar-link" href='/villes'>Ville</a>
             </li>
             <li className="navbar-item">
-              <Link to="/about" className="navbar-link">
-                About
-              </Link>
+            <a className="navbar-link" href='/zone'>Zone</a>
+
             </li>
             <li className="navbar-item">
               <Link to="/services" className="navbar-link">
