@@ -68,6 +68,7 @@ class SpecialiteEdit extends Component {
       }),
     });
     this.props.history.push('/specialite');
+
   }
   
   
