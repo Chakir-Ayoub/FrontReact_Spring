@@ -42,7 +42,7 @@ class VilleList extends Component {
                 <td>{ville.nom}</td>
                 <td>
                     <ButtonGroup>
-                        <a size="sm" color="primary" class="btn btn-primary" href={"/ville/" + ville.villeid}>Edit</a>
+                        <a size="sm" color="primary" class="btn btn-primary" href={"/villes/" + ville.villeid}>Edit</a>
                         <Button size="sm" color="danger" onClick={() =>{this.remove(ville.villeid);  window.location.reload();}}>Delete</Button>
                     </ButtonGroup>
                 </td>
