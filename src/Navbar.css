@@ -68,3 +68,7 @@
   .navbar-button:hover {
     background-color: #d00;
   }
+
+  .navbar-link {
+    color: white;
+  }

@@ -16,6 +16,7 @@ class VilleList extends Component {
             .then(response => response.json())
             .then(data => this.setState({villes: data}));
     }
+    
     async remove(id) {
         await fetch(`http://localhost:8080/ville/${id}`, {
             method: 'DELETE',
@@ -31,43 +32,44 @@ class VilleList extends Component {
     
     render() {
         const {villes, isLoading} = this.state;
-    
+
         if (isLoading) {
             return <p>Loading...</p>;
         }
     
         const clientList = villes.map(ville => {
-            return <tr key={ville.id}>
-                <td style={{whiteSpace: 'nowrap'}}>{ville.villeid}</td>
-                <td>{ville.nom}</td>
-                <td>
-                    <ButtonGroup>
-                        <a size="sm" color="primary" class="btn btn-primary" href={"/villes/" + ville.villeid}>Edit</a>
-                        <Button size="sm" color="danger" onClick={() =>{this.remove(ville.villeid);  window.location.reload();}}>Delete</Button>
-                    </ButtonGroup>
-                </td>
-
-            </tr>
+            return (
+                <tr style={{borderBlockColor: 'black' }} key={ville.id} >
+                    <td style={{whiteSpace: 'nowrap',color:'white'}}>{ville.villeid}</td>
+                    <td style={{whiteSpace: 'nowrap',color:'white'}}>{ville.nom}</td>
+                    <td>
+                        <ButtonGroup>
+                            <a size="sm" color="primary" className="btn btn-primary" href={"/villes/" + ville.villeid}>Edit</a>
+                            <Button size="sm" color="danger" onClick={() =>{this.remove(ville.villeid);  window.location.reload();}}>Delete</Button>
+                        </ButtonGroup>
+                    </td>
+                </tr>
+            );
         });
     
         return (
             <div>
                 <AppNavbar/>
-                <Container fluid>
-                    <div className="float-right">
-                        <a size="sm" class="btn btn-success" tag={Link} href={"/villes/new"}>Add Ville</a>
+                <div >
+                        <a size="sm" className="btn btn-success" tag={Link} href={"/villes/new"}>Add Ville</a>
                     </div>
-                    <h3>villes</h3>
-                    <Table className="mt-4">
+                <Container fluid className="d-flex justify-content-between align-items-center mt-5">
+
+                    <Table class="mt-4" style={{textAlign:'center',color:'black'}}>
                         <thead>
-                        <tr>
-                            <th width="30%">#</th>
-                            <th width="30%">NAME</th>
-                            <th width="40%">Actions</th>
-                        </tr>
+                            <tr>
+                                <th width="30%" style={{color:'white'}}>#</th>
+                                <th width="30%" style={{color:'white'}}>NAME</th>
+                                <th width="40%" style={{color:'white'}}>Actions</th>
+                            </tr>
                         </thead>
                         <tbody>
-                        {clientList}
+                            {clientList}
                         </tbody>
                     </Table>
                 </Container>
@@ -75,4 +77,5 @@ class VilleList extends Component {
         );
     }
 }
+
 export default VilleList;

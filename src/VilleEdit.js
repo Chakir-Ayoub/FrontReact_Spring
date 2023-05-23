@@ -39,7 +39,7 @@ class VilleEdit extends Component {
         event.preventDefault();
         const {item} = this.state;
     
-        await fetch('http://localhost:8080/ville' + (item.id ? '/' + item.id : ''), {
+        await fetch('http://localhost:8080/ville' + (item.villeid ? '/' + item.villeid : ''), {
             method: (item.id) ? 'PUT' : 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -47,25 +47,25 @@ class VilleEdit extends Component {
             },
             body: JSON.stringify(item),
         });
-        this.props.history.push('http://localhost:8080/ville');
+        this.props.history.push('/villes');
     }
 
     render() {
         const {item} = this.state;
-        const title = <h2>{item.villeid ? 'Edit Ville' : 'Add Ville'}</h2>;
+        const title = <h2 style={{fontfamily: 'Arial', fontsize: '16px',fontweight: 'bold', color: '#fff',    backgroundcolor: '#f58220', padding: '10px',borderradius: '5px'}} > {item.villeid ? 'Edit Ville' : 'Add Ville'}</h2>;
     
         return <div>
             <AppNavbar/>
-            <Container>
+            <Container >
                 {title}
                 <Form onSubmit={this.handleSubmit}>
                     <FormGroup>
-                        <Label for="nom">Name</Label>
+                        <Label for="nom" style={{fontfamily: 'Arial', fontsize: '16px',fontweight: 'bold', color: '#fff',    backgroundcolor: '#f58220', padding: '10px',borderradius: '5px'}} >Name</Label>
                         <Input type="text" name="nom" id="nom" value={item.nom || ''}
                                onChange={this.handleChange} autoComplete="nom"/>
                     </FormGroup>
                     <FormGroup>
-                        <Button color="primary" type="submit">Save</Button>{' '}
+                        <Button color="primary" type="submit" >Save</Button>{' '}
                         <Button color="secondary" href={"/villes"}>Cancel</Button>
                     </FormGroup>
                 </Form>

@@ -12,13 +12,16 @@ import SerieList from './SerieList';
 import SerieEdit from './SerieEdit';
 import RestoList from './RestoList';
 import RestoEdit from './RestoEdit';
+import PhotoList from './PhotoList';
+import PhotoEdit from './PhotoEdit';
+import Login from './Login';
 class App extends Component {
   render() {
     return (
         <Router>
           <Switch>
           
-            <Route path='/' exact={true} component={Home}/>
+            <Route path='/' exact={true} component={Login}/>
             <Route path='/villes' exact={true} component={VilleList}/>
             <Route path='/villes/:id' component={VilleEdit}/>
 
@@ -34,6 +37,10 @@ class App extends Component {
 
              <Route path='/resto' exact={true} component={RestoList}></Route>
              <Route path='/resto/:id' exact={true} component={RestoEdit}/> 
+
+             <Route path='/photo' exact={true} component={PhotoList}></Route>
+             <Route path='/photo/:id' exact={true} component={PhotoEdit}/> 
+             photo
           </Switch>
         </Router>
     )

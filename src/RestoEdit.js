@@ -87,7 +87,7 @@ class RestoEdit extends Component {
 
   render() {
     const { item, values } = this.state;
-    const title = <h2>{item.restoid ? 'Edit resto' : 'Add resto'}</h2>;
+    const title = <h2 style={{ color: '#fff',    backgroundcolor: '#f58220'}}>{item.restoid ? 'Edit resto' : 'Add resto'}</h2>;
 
     return (
       <div>
@@ -96,41 +96,41 @@ class RestoEdit extends Component {
           {title}
           <Form onSubmit={this.handleSubmit}>
             <FormGroup>
-              <Label for="nom">Name</Label>
+              <Label for="nom" style={{ color: '#fff',    backgroundcolor: '#f58220'}} >Name</Label>
               <Input type="text" name="nom" id="nom" value={item.nom || ''}
                      onChange={this.handleChange} autoComplete="nom" />
                           
-              <Label for="rank">Rank</Label>
+              <Label for="rank" style={{ color: '#fff',    backgroundcolor: '#f58220'}} >Rank</Label>
               <Input type="text" name="rank" id="rank" value={item.rank || ''}
                      onChange={this.handleChange} autoComplete="rank" />
               
-              <Label for="adresse">Adresse</Label>
+              <Label for="adresse" style={{color: '#fff',    backgroundcolor: '#f58220'}} >Adresse</Label>
               <Input type="text" name="adresse" id="adresse" value={item.adresse || ''}
                      onChange={this.handleChange} autoComplete="adresse" />
 
-              <Label for="latitude">Latitude</Label>
+              <Label for="latitude" style={{color: '#fff',    backgroundcolor: '#f58220'}} >Latitude</Label>
               <Input type="text" name="latitude" id="latitude" value={item.latitude || ''}
                      onChange={this.handleChange} autoComplete="latitude" />    
 
-              <Label for="longitude">Longitude</Label>
+              <Label for="longitude" style={{color: '#fff',    backgroundcolor: '#f58220'}}>Longitude</Label>
               <Input type="text" name="longitude" id="longitude" value={item.longitude || ''}
                      onChange={this.handleChange} autoComplete="longitude" />
 
-              <Label for="heure_open">Heure_open</Label>
+              <Label for="heure_open" style={{color: '#fff',    backgroundcolor: '#f58220'}}>Heure_open</Label>
               <Input type="text" name="heure_open" id="heure_open" value={item.heure_open || ''}
                      onChange={this.handleChange} autoComplete="heure_open" />
 
-              <Label for="heure_close">Heure_close</Label>
+              <Label for="heure_close" style={{color: '#fff',    backgroundcolor: '#f58220'}}>Heure_close</Label>
               <Input type="text" name="heure_close" id="heure_close" value={item.heure_close || ''}
                      onChange={this.handleChange} autoComplete="heure_close" />
 
-              <Label for="week">Week</Label>
+              <Label for="week" style={{color: '#fff',    backgroundcolor: '#f58220'}}>Week</Label>
               <Input type="text" name="week" id="week" value={item.week || ''}
                      onChange={this.handleChange} autoComplete="week" />
                         
               <FormGroup>
-              <Label for="Zone">Zone</Label>
-              <select id="zone-select" name="zone" onChange={this.handleChange}>
+              <Label for="Zone" style={{color: '#fff',    backgroundcolor: '#f58220'}}>Zone</Label>
+              <select style={{ width:'100%'}} id="zone-select" name="zone"  onChange={this.handleChange}>
               {this.state.zones && this.state.zones.map((ville) => (
                   <option key={ville.id} value={JSON.stringify(ville)}>{ville.nom}</option>
               ))}
@@ -139,8 +139,8 @@ class RestoEdit extends Component {
 
 
             <FormGroup>
-              <Label for="serie">Serie</Label>
-              <select id="serie-select" name="serie" onChange={this.handleChange}>
+              <Label for="serie" style={{color: '#fff',    backgroundcolor: '#f58220'}}>Serie</Label>
+              <select style={{ width:'100%'}}  id="serie-select" name="serie" onChange={this.handleChange} >
                 {this.state.series && this.state.series.map((serie) => (
                   <option key={serie.id} value={JSON.stringify(serie)}>{serie.nom}</option>
                 ))}

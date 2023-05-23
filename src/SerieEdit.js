@@ -78,7 +78,7 @@ class SerieEdit extends Component {
 
   render() {
     const { item, values } = this.state;
-    const title = <h2>{item.serieid ? 'Edit serie' : 'Add serie'}</h2>;
+    const title = <h2 style={{fontfamily: 'Arial', fontsize: '16px',fontweight: 'bold', color: '#fff',    backgroundcolor: '#f58220', padding: '10px',borderradius: '5px'}} >{item.serieid ? 'Edit serie' : 'Add serie'}</h2>;
 
     return (
       <div>
@@ -87,7 +87,7 @@ class SerieEdit extends Component {
           {title}
           <Form onSubmit={this.handleSubmit}>
             <FormGroup>
-              <Label for="nom">Name</Label>
+              <Label for="nom" style={{fontfamily: 'Arial', fontsize: '16px',fontweight: 'bold', color: '#fff',    backgroundcolor: '#f58220', padding: '10px',borderradius: '5px'}} >Name</Label>
               <Input type="text" name="nom" id="nom" value={item.nom || ''}
                      onChange={this.handleChange} autoComplete="nom" />
             </FormGroup>

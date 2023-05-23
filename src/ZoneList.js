@@ -30,51 +30,52 @@ class ZoneList extends Component {
     }
     
     render() {
-        const {zones, isLoading} = this.state;
+        const { zones, isLoading } = this.state;
     
         if (isLoading) {
             return <p>Loading...</p>;
         }
     
-        const ZoneList = zones.map(zone => {
-            return <tr key={zone.id}>
-                <td style={{whiteSpace: 'nowrap'}}>{zone.zoneid}</td>
-                <td>{zone.nom}</td>
-                <td>{zone.ville.nom}</td>
-                <td>
-                    <ButtonGroup>
-                        <a size="sm" color="primary" class="btn btn-primary" href={"/zone/" + zone.zoneid}>Edit</a>
-                        <Button size="sm" color="danger" onClick={() =>{this.remove(zone.zoneid);  window.location.reload();}}>Delete</Button>
-                    </ButtonGroup>
-                </td>
-
-            </tr>
+        const zoneList = zones.map(zone => {
+            return (
+                <tr style={{borderBlockColor: 'black' }} key={zone.id}>
+                    <td style={{ whiteSpace: 'nowrap', color: 'white' }}>{zone.zoneid}</td>
+                    <td style={{ whiteSpace: 'nowrap', color: 'white' }}>{zone.nom}</td>
+                    <td style={{ whiteSpace: 'nowrap', color: 'white' }}>{zone.ville.nom}</td>
+                    <td>
+                        <ButtonGroup>
+                            <a size="sm" color="primary" className="btn btn-primary" href={"/zone/" + zone.zoneid}>Edit</a>
+                            <Button size="sm" color="danger" onClick={() => { this.remove(zone.zoneid); window.location.reload(); }}>Delete</Button>
+                        </ButtonGroup>
+                    </td>
+                </tr>
+            );
         });
     
         return (
             <div>
-                <AppNavbar/>
+                <AppNavbar />
                 <Container fluid>
                     <div className="float-right">
-                        <a size="sm" class="btn btn-success" tag={Link} href={"/zone/new"}>Add Zone</a>
+                        <a size="sm" className="btn btn-success" tag={Link} href={"/zone/new"}>Add Zone</a>
                     </div>
-                    <h3>zones</h3>
-                    <Table className="mt-4">
+                    <Table className="mt-4" style={{ textAlign: 'center', color: 'black' }}>
                         <thead>
-                        <tr>
-                            <th width="30%">#</th>
-                            <th width="30%">NAME</th>
-                            <th width="30%">City</th>
-                            <th width="40%">Actions</th>
-                        </tr>
+                            <tr>
+                                <th width="30%" style={{ color: 'white' }}>#</th>
+                                <th width="30%" style={{ color: 'white' }}>NAME</th>
+                                <th width="30%" style={{ color: 'white' }}>City</th>
+                                <th width="40%" style={{ color: 'white' }}>Actions</th>
+                            </tr>
                         </thead>
                         <tbody>
-                        {ZoneList}
+                            {zoneList}
                         </tbody>
                     </Table>
                 </Container>
             </div>
         );
     }
+    
 }
 export default ZoneList;

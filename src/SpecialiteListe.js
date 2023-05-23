@@ -30,49 +30,50 @@ class SpecialiteListe extends Component {
     }
     
     render() {
-        const {specialites, isLoading} = this.state;
-    
+        const { specialites, isLoading } = this.state;
+      
         if (isLoading) {
-            return <p>Loading...</p>;
+          return <p>Loading...</p>;
         }
-    
-        const clientList = specialites.map(specialite => {
-            return <tr key={specialite.id}>
-                <td style={{whiteSpace: 'nowrap'}}>{specialite.specialiteid}</td>
-                <td>{specialite.nom}</td>
-                <td>
-                    <ButtonGroup>
-                        <a size="sm" color="primary" class="btn btn-primary" href={"/specialite/" + specialite.specialiteid}>Edit</a>
-                        <Button size="sm" color="danger" onClick={() =>{this.remove(specialite.specialiteid);  window.location.reload();}}>Delete</Button>
-                    </ButtonGroup>
-                </td>
-
+      
+        const specialiteList = specialites.map(specialite => {
+          return (
+            <tr style={{borderBlockColor: 'black' }} key={specialite.id}>
+              <td style={{ whiteSpace: 'nowrap', color: 'white' }}>{specialite.specialiteid}</td>
+              <td style={{ whiteSpace: 'nowrap', color: 'white' }}>{specialite.nom}</td>
+              <td>
+                <ButtonGroup>
+                  <a size="sm" color="primary" className="btn btn-primary" href={"/specialite/" + specialite.specialiteid}>Edit</a>
+                  <Button size="sm" color="danger" onClick={() => { this.remove(specialite.specialiteid); window.location.reload(); }}>Delete</Button>
+                </ButtonGroup>
+              </td>
             </tr>
+          );
         });
-    
+      
         return (
-            <div>
-                <AppNavbar/>
-                <Container fluid>
-                    <div className="float-right">
-                        <a size="sm" class="btn btn-success" tag={Link} href={"/specialites/new"}>Add specialite</a>
-                    </div>
-                    <h3>specialites</h3>
-                    <Table className="mt-4">
-                        <thead>
-                        <tr>
-                            <th width="30%">#</th>
-                            <th width="30%">NAME</th>
-                            <th width="40%">Actions</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {clientList}
-                        </tbody>
-                    </Table>
-                </Container>
-            </div>
+          <div>
+            <AppNavbar />
+            <Container fluid>
+              <div className="float-right">
+                <a size="sm" className="btn btn-success" tag={Link} href={"/specialite/new"}>Add Specialite</a>
+              </div>
+              <Table className="mt-4" style={{ textAlign: 'center', color: 'black' }}>
+                <thead>
+                  <tr>
+                    <th width="30%" style={{ color: 'white' }}>#</th>
+                    <th width="30%" style={{ color: 'white' }}>NAME</th>
+                    <th width="40%" style={{ color: 'white' }}>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {specialiteList}
+                </tbody>
+              </Table>
+            </Container>
+          </div>
         );
-    }
+      }
+      
 }
 export default SpecialiteListe;

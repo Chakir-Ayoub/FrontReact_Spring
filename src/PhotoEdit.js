@@ -3,11 +3,11 @@ import { Link, withRouter } from 'react-router-dom';
 import { Button, Container, Form, FormGroup, Input, Label } from 'reactstrap';
 import AppNavbar from './AppNavbar';
 
-class ZoneEdit extends Component {
+class photoEdit extends Component {
   emptyItem = {
-    zoneid: '',
-    nom: '',
-    ville: ''
+    photoid: '',
+    url: '',
+    resto: ''
   };
 
   constructor(props) {
@@ -17,7 +17,7 @@ class ZoneEdit extends Component {
       item: this.emptyItem,
       values: [],
       validationError: '',
-      zones: []
+      photos: []
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -25,18 +25,18 @@ class ZoneEdit extends Component {
   }
 
   async componentDidMount() {
-    const zones = await fetch('http://localhost:8080/ville')
+    const photos = await fetch('http://localhost:8080/resto')
     .then(res => res.json())
     .catch(error => console.error(error));
 
-    this.setState({ zones });
+    this.setState({ photos });
 
     const { id } = this.props.match.params;
 
     if (id !== 'new') {
-      const zoneResponse = await fetch(`http://localhost:8080/zone/Byid/${id}`);
-      const zone = await zoneResponse.json();
-      this.setState({ item: zone });
+      const photoResponse = await fetch(`http://localhost:8080/photo/Byid/${id}`);
+      const photo = await photoResponse.json();
+      this.setState({ item: photo });
     }
   }
 
@@ -55,7 +55,7 @@ class ZoneEdit extends Component {
     event.preventDefault();
     const { item } = this.state;
   
-    await fetch('http://localhost:8080/zone' + (item.zoneid ? '/' + item.zoneid : ''), {
+    await fetch('http://localhost:8080/photo' + (item.photoid ? '/' + item.photoid : ''), {
       method: (item.id) ? 'PUT' : 'POST',
       headers: {
         'Accept': 'application/json',
@@ -63,12 +63,12 @@ class ZoneEdit extends Component {
       },
       body: JSON.stringify({
         ...item,
-       // ville: JSON.parse(item.ville)
-       ville: item.ville ? JSON.parse(item.ville) : null
+       // resto: JSON.parse(item.resto)
+       resto: item.resto ? JSON.parse(item.resto) : null
 
       }),
     });
-    this.props.history.push('/zone');
+    this.props.history.push('/photo');
   }
   
   
@@ -76,7 +76,7 @@ class ZoneEdit extends Component {
 
   render() {
     const { item, values } = this.state;
-    const title = <h2 style={{fontfamily: 'Arial', fontsize: '16px',fontweight: 'bold', color: '#fff',    backgroundcolor: '#f58220', padding: '10px',borderradius: '5px'}} >{item.zoneid ? 'Edit Zone' : 'Add Zone'}</h2>;
+    const title = <h2 style={{fontfamily: 'Arial', fontsize: '16px',fontweight: 'bold', color: '#fff',    backgroundcolor: '#f58220', padding: '10px',borderradius: '5px'}} >{item.photoid ? 'Edit photo' : 'Add photo'}</h2>;
 
     return (
       <div>
@@ -85,20 +85,20 @@ class ZoneEdit extends Component {
           {title}
           <Form onSubmit={this.handleSubmit}>
             <FormGroup>
-              <Label for="nom" style={{fontfamily: 'Arial', fontsize: '16px',fontweight: 'bold', color: '#fff',    backgroundcolor: '#f58220', padding: '10px',borderradius: '5px'}} >Name</Label>
-              <Input type="text" name="nom" id="nom" value={item.nom || ''} onChange={this.handleChange} autoComplete="nom" />
+              <Label for="url" style={{fontfamily: 'Arial', fontsize: '16px',fontweight: 'bold', color: '#fff',    backgroundcolor: '#f58220', padding: '10px',borderradius: '5px'}} >Name</Label>
+              <Input type="text" name="url" id="url" value={item.url || ''} onChange={this.handleChange} autoComplete="url" />
             </FormGroup>
             <FormGroup>
-              <Label for="ville" style={{fontfamily: 'Arial', fontsize: '16px',fontweight: 'bold', color: '#fff',    backgroundcolor: '#f58220', padding: '10px',borderradius: '5px'}}>City</Label>
-              <select id="ville-select" name="ville" className="custom-select" style={{width:'100%'}}  onChange={this.handleChange}>
-                {this.state.zones.map((ville) => (
-                  <option key={ville.id} value={JSON.stringify(ville)}>{ville.nom}</option>
+              <Label for="resto" style={{fontfamily: 'Arial', fontsize: '16px',fontweight: 'bold', color: '#fff',    backgroundcolor: '#f58220', padding: '10px',borderradius: '5px'}}>City</Label>
+              <select id="resto-select" name="resto" className="custom-select" style={{width:'100%'}}  onChange={this.handleChange}>
+                {this.state.photos.map((resto) => (
+                  <option key={resto.id} value={JSON.stringify(resto)}>{resto.nom}</option>
                 ))}
               </select>
             </FormGroup>
             <FormGroup>
               <Button color="primary" type="submit">Save</Button>{' '}
-              <Button color="secondary" href="/zone">Cancel</Button>
+              <Button color="secondary" href="/photo">Cancel</Button>
             </FormGroup>
           </Form>
         </Container>
@@ -107,4 +107,4 @@ class ZoneEdit extends Component {
   }
 }
 
-export default withRouter(ZoneEdit);
+export default withRouter(photoEdit);
